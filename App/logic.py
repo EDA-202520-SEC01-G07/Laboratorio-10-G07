@@ -136,7 +136,6 @@ def total_stops(analyzer):
     """
     Total de paradas de autobus en el grafo
     """
-    # TODO: Retorne el número de vértices del grafo
     return G.size(analyzer['stops'])
 
 
@@ -144,7 +143,6 @@ def total_connections(analyzer):
     """
     Total de enlaces entre las paradas
     """
-    # TODO: Retorne el número de arcos del grafo de conexiones
     return G.size(analyzer['connections'])
     
 
@@ -254,7 +252,15 @@ def get_most_concurrent_stops(analyzer):
     Obtiene las 5 paradas más concurridas
     """
     # TODO: Obtener las 5 paradas más concurridas, es decir, con más arcos salientes
-    ...
+    analyzer_connections = analyzer['connections']
+    vertex_keys = G.vertices(analyzer_connections)
+    stop_degrees = lt.new_list()
+    for key in vertex_keys['elements']:
+        degree = G.degree(analyzer_connections, key)
+        lt.add_last(stop_degrees, (key, degree))
+    sorted_stops = lt.quick_sort(stop_degrees, cmp=lambda x, y: y[1] - x[1])
+    top_5_stops = lt.sub_list(sorted_stops, 1, 5)
+    return top_5_stops
 
 def get_route_between_stops_dfs(analyzer, stop1, stop2):
     """

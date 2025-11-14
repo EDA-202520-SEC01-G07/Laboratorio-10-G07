@@ -37,3 +37,45 @@ def order(my_graph):
 def size(my_graph):
     return my_graph["num_edges"]
 
+def degree(my_graph, key_u):
+    vertex_u = ml.get(my_graph["vertices"], key_u)
+    if vertex_u is None:
+        raise Exception("El vertice u no existe")
+    return lt.size(vertex_u["adyacentes"])
+
+def adjacent(my_graph, key_u):
+    vertex_u = ml.get(my_graph["vertices"], key_u)
+    if vertex_u is None:
+        raise Exception("El vertice u no existe")
+    return vertex_u["adyacentes"]
+
+def vertices (my_graph):
+    keys = ml.key_set(my_graph["vertices"])
+    return keys
+
+def edges_vertex(my_graph, key_u):
+    vertex_u = ml.get(my_graph["vertices"], key_u)
+    if vertex_u is None:
+        raise Exception("El vertice u no existe")
+    return vertex_u["adyacentes"]
+
+def get_vertex(my_graph, key_u):
+    vertex_u = ml.get(my_graph["vertices"], key_u)
+    if vertex_u is None:
+        raise Exception("El vertice u no existe")
+    return vertex_u
+
+def update_vertex_info(my_graph, key_u, new_info):
+    vertex_u = ml.get(my_graph["vertices"], key_u)
+    if vertex_u is None:
+        raise Exception("El vertice u no existe")
+    vertex_u["info"] = new_info
+    ml.put(my_graph["vertices"], key_u, vertex_u)
+    return my_graph
+
+def get_vertex_information(my_graph, key_u):
+    vertex_u = ml.get(my_graph["vertices"], key_u)
+    if vertex_u is None:
+        raise Exception("El vertice u no existe")
+    return vertex_u["info"]
+
