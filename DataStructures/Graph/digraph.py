@@ -27,3 +27,6 @@ def add_edge (my_graph, key_u, key_v, weight=1.0):
     lt.add_last(vertex_u["adyacentes"], (key_v, weight))
     my_graph["num_edges"] += 1
     return my_graph
+# contains_vertex()
+# order()
+# size()
