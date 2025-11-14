@@ -1,7 +1,8 @@
 from DataStructures.List import array_list as lt
 from DataStructures.Map import map_linear_probing as ml
 def new_graph(order):
-    graph = ml.new_map(order, 0.5, prime=109345121)
+    graph = { "vertices"=ml.new_map(order, 0.5, prime=109345121),
+             "num_edges"=0}
     return graph
     
 def insert_vertex(my_graph, key_u, info_u):
