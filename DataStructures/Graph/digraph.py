@@ -1,5 +1,6 @@
 from DataStructures.List import array_list as lt
 from DataStructures.Map import map_linear_probing as ml
+from DataStructures.Graph import vertex as vert
 def new_graph(order):
     graph= {
         "vertices" :ml.new_map(order, 0.5, prime=109345121), 
@@ -8,23 +9,19 @@ def new_graph(order):
     return graph
     
 def insert_vertex(my_graph, key_u, info_u):
-    vertex = {
-        "key": key_u,
-        "info": info_u,
-        "adyacentes": lt.new_list()
-    }
+    vertex = vert.new_vertex(key_u, info_u)
     ml.put(my_graph["vertices"], key_u, vertex)
     return my_graph
     
 
 def add_edge (my_graph, key_u, key_v, weight=1.0):
     vertex_u = ml.get(my_graph["vertices"], key_u)
+    vertex_v = ml.get(my_graph["vertices"], key_v)
     if vertex_u is None or vertex_v is None:
         raise Exception("El vertice u no existe")
-    vertex_v = ml.get(my_graph["vertices"], key_v)
     if vertex_v is None:
         raise Exception("El vertice v no existe")
-    lt.add_last(vertex_u["adyacentes"], (key_v, weight))
+    vert.add_adjacent(vertex_u, key_v, weight)
     my_graph["num_edges"] += 1
     return my_graph
 
@@ -41,13 +38,13 @@ def degree(my_graph, key_u):
     vertex_u = ml.get(my_graph["vertices"], key_u)
     if vertex_u is None:
         raise Exception("El vertice u no existe")
-    return lt.size(vertex_u["adyacentes"])
+    return ml.size(vertex_u["adjacents"])
 
 def adjacent(my_graph, key_u):
     vertex_u = ml.get(my_graph["vertices"], key_u)
     if vertex_u is None:
         raise Exception("El vertice u no existe")
-    return vertex_u["adyacentes"]
+    return vertex_u["adjacents"]
 
 def vertices (my_graph):
     keys = ml.key_set(my_graph["vertices"])
@@ -57,7 +54,7 @@ def edges_vertex(my_graph, key_u):
     vertex_u = ml.get(my_graph["vertices"], key_u)
     if vertex_u is None:
         raise Exception("El vertice u no existe")
-    return vertex_u["adyacentes"]
+    return vertex_u["adjacents"]
 
 def get_vertex(my_graph, key_u):
     vertex_u = ml.get(my_graph["vertices"], key_u)
@@ -69,7 +66,7 @@ def update_vertex_info(my_graph, key_u, new_info):
     vertex_u = ml.get(my_graph["vertices"], key_u)
     if vertex_u is None:
         raise Exception("El vertice u no existe")
-    vertex_u["info"] = new_info
+    vertex_u["value"] = new_info
     ml.put(my_graph["vertices"], key_u, vertex_u)
     return my_graph
 
@@ -77,5 +74,5 @@ def get_vertex_information(my_graph, key_u):
     vertex_u = ml.get(my_graph["vertices"], key_u)
     if vertex_u is None:
         raise Exception("El vertice u no existe")
-    return vertex_u["info"]
+    return vertex_u["value"]
 

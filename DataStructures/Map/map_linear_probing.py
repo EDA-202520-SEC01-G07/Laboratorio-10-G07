@@ -84,20 +84,23 @@ def rehash(my_map):
    return nuevo
 
 def new_map(num_elements, load_factor, prime=109345121):
-    y=mf.next_prime(num_elements//load_factor)
-    x = lt.new_list()
-    for i in range(y):
-        lt.add_last(x, me.new_map_entry(None,None))
-    map = {"prime": prime,
-           "capacity": y,
-           "scale": random.randrange(1, prime-1),
-           "shift":random.randrange(0, prime-1),
-           "table": x,
-           "current_factor": 0,
-           "limit_factor": load_factor,
-           "size": 0
-    }
-    return map
+   b=int(num_elements//load_factor)
+   if b<1:
+      b = 1
+   y = mf.next_prime(b)
+   x = lt.new_list()
+   for i in range(y):
+       lt.add_last(x, me.new_map_entry(None,None))
+   map = {"prime": prime,
+         "capacity": y,
+         "scale": random.randrange(1, prime-1),
+         "shift":random.randrange(0, prime-1),
+         "table": x,
+         "current_factor": 0,
+         "limit_factor": load_factor,
+         "size": 0
+   }
+   return map
     
 def put(mapa, key, valor):
    llave = mf.hash_value(mapa, key) #Hash de la llave

@@ -48,7 +48,10 @@ def rehash(my_map):
     return my_map
 
 def new_map(num_elements, load_factor, prime=109345121):
-    y=mf.next_prime(num_elements//load_factor)
+    b=int(num_elements//load_factor)
+    if b < 1:
+        b = 1
+    y = mf.next_prime(b)
     x = alt.new_list()
     map = {"prime": prime,
            "capacity": y,
