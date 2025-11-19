@@ -1,5 +1,5 @@
 
-from DataStructures.stack import stack as stack
+from DataStructures.Stack import stack as stack
 from DataStructures.Utils.utils import handle_not_implemented
 
 def setup_stack():

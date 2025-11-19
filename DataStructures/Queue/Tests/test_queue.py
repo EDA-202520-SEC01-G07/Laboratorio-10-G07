@@ -1,5 +1,5 @@
 
-from DataStructures.queue import queue as queue
+from DataStructures.Queue import queue as queue
 from DataStructures.Utils.utils import handle_not_implemented
 
 def setup_queue():
