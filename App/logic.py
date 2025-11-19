@@ -77,7 +77,7 @@ def new_analyzer():
         }
 
         analyzer['stops'] = m.new_map(
-            num_elements=8000, load_factor=0.7, prime=109345121)
+            num_elements=4500, load_factor=0.7, prime=109345121)
 
         analyzer['connections'] = G.new_graph(order=20000)
         return analyzer
@@ -136,7 +136,7 @@ def total_stops(analyzer):
     """
     Total de paradas de autobus en el grafo
     """
-    return G.size(analyzer['stops'])
+    return m.size(analyzer['stops'])
 
 
 def total_connections(analyzer):
@@ -212,7 +212,7 @@ def add_route_stop(analyzer, service):
     """
     stop_info = m.get(analyzer['stops'], service['BusStopCode'])
     stop_services = stop_info['services']
-    if lt.is_present(stop_services, service['ServiceNo'], lt.default_function) == -1:
+    if lt.is_present(stop_services, service['ServiceNo'], lt.default_sort_criteria) == -1:
         lt.add_last(stop_services, service['ServiceNo'])
 
     return analyzer
@@ -258,7 +258,7 @@ def get_most_concurrent_stops(analyzer):
     for key in vertex_keys['elements']:
         degree = G.degree(analyzer_connections, key)
         lt.add_last(stop_degrees, (key, degree))
-    sorted_stops = lt.quick_sort(stop_degrees, cmp=lambda x, y: y[1] - x[1])
+    sorted_stops = lt.quick_sort(stop_degrees, lt.default_sort_criteria)
     top_5_stops = lt.sub_list(sorted_stops, 1, 5)
     return top_5_stops
 
