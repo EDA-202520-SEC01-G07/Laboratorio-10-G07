@@ -251,7 +251,7 @@ def get_most_concurrent_stops(analyzer):
     """
     Obtiene las 5 paradas más concurridas
     """
-    # TODO: Obtener las 5 paradas más concurridas, es decir, con más arcos salientes
+    # TODO: Obtener las 5 paradas más concurridas, es decir, la suma de los arcos con las llaves que comparten una parada
     analyzer_connections = analyzer['connections']
     vertex_keys = G.vertices(analyzer_connections)
     stop_degrees = lt.new_list()

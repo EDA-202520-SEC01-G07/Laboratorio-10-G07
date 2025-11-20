@@ -24,7 +24,7 @@
  *
  """
 
-
+from DataStructures.List import single_linked_list as lt
 import sys
 import threading
 from App import logic
@@ -75,7 +75,11 @@ def option_one(cont):
 
 def option_two(cont ):
     # TODO: Imprimir los resultados de la opción 2
-    print(logic.get_most_concurrent_stops(cont))
+    r = logic.get_most_concurrent_stops(cont)
+    print("Las paradas más concurridas son: ")
+    for i in range(lt.size(r)):
+        elem = lt.get_element(r, i)
+        print(str(i+1)+". " + str(elem[0])+": "+str(elem[1])+" conexiones")
 
 def option_three(cont):
     # TODO: Imprimir los resultados de la opción 3
