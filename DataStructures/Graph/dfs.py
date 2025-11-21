@@ -3,10 +3,6 @@ from DataStructures.List import array_list as lt
 from DataStructures.Queue import queue as q
 from DataStructures.Stack import stack as s
 
-def dfs(my_graph, source):
-    visitados= G.new_graph(order=0)
-    dfs_vertex(my_graph, source, visitados)
-    return visitados
 
 def dfs(my_graph, source):
     # grafo que almacenará los visitados
