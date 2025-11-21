@@ -129,7 +129,15 @@ def option_three(cont):
 
 def option_four(cont):
     # TODO: Imprimir los resultados de la opción 4
-    ...
+    print("---- OCIÓN 4 (BFS) ----")
+    stop1 = input("Parada inicial: ")
+    stop2 = input("Parada destino: ")
+    
+    path = logic.get_route_between_stops_bfs(cont, stop1, stop2)
+    if path is None:
+        print("No hay ruta entre las paradas " + stop1 + " y " + stop2)
+    else:
+        print(path) #Revisar cómo aparece para darlo en el formato que es
 
 def option_five(cont):
     # TODO: Imprimir los resultados de la opción 5

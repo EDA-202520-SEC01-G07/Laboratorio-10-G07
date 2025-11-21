@@ -31,9 +31,9 @@
 from DataStructures.List import single_linked_list as lt
 from DataStructures.List import array_list as al
 from DataStructures.Map import map_linear_probing as m
-from DataStructures.Priority_queue import priority_queue as pq
 from DataStructures.Graph import digraph as G
 from DataStructures.Graph import dfs as dfs
+from DataStructures.Graph import bfs as bfs
 from DataStructures.Stack import stack as s
 
 import csv
@@ -255,7 +255,7 @@ def get_most_concurrent_stops(analyzer):
     """
     Obtiene las 5 paradas más concurridas
     """
-    # TODO: Obtener las 5 paradas más concurridas, es decir, la suma de los arcos con las llaves que comparten una parada (sin el bus)
+    # TODO: Obtener las 5 paradas más concurridas, es decir, la suma de los arcos con las llaves que comparten una parada (sin el bus)   
     analyzer_connections = analyzer['connections']
     vertex_keys = G.vertices(analyzer_connections)
     
@@ -298,7 +298,15 @@ def get_route_between_stops_bfs(analyzer, stop1, stop2):
     Obtener la ruta entre dos parada usando bfs
     """
     # TODO: Obtener la ruta entre dos parada usando bfs
-    ...
+    graph = analyzer["connections"]
+    if not G.contains_vertex(graph, stop1) or not G.contains_vertex(graph, stop2):
+        return None
+    visited_map = bfs.bfs(graph, stop1)
+    if not bfs.has_path_to(stop2, visited_map):
+        return None
+    path = bfs.path_to(stop2, visited_map)
+    return path
+    
 
 def get_shortest_route_between_stops(analyzer, stop1, stop2):
     """
