@@ -73,7 +73,7 @@ def option_one(cont):
     print('Numero de arcos: ' + str(numedges))
     print('El limite de recursion actual: ' + str(sys.getrecursionlimit()))
 
-def option_two(cont ):
+def option_two(cont):
     # TODO: Imprimir los resultados de la opción 2
     r = logic.get_most_concurrent_stops(cont)
     print("Las paradas más concurridas son: ")

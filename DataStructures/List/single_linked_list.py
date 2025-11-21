@@ -213,7 +213,6 @@ def sub_list(my_list, pos, num_elmts):
             nodo=nodo["next"]
     return s_list
 
-#Funciones Lab 5
 def default_sort_criteria(element_1, element_2):
     is_sorted = False
     if element_1 < element_2:
@@ -221,6 +220,11 @@ def default_sort_criteria(element_1, element_2):
     return is_sorted
 sort_criteria = default_sort_criteria
 
+def sort_tupla(element_1, element_2):
+    is_sorted = False
+    if element_1[1] < element_2[1]:
+        is_sorted = True
+    return is_sorted
 
 def insertion_sort(my_list, default_sort_criteria):
     nodo = my_list["first"]
