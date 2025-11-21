@@ -50,7 +50,7 @@ def rehash(my_map):
    cap_nueva = mf.next_prime(2*my_map["capacity"])
    cap_ant = my_map["capacity"]
    nuevo = new_map(int(0.5*cap_nueva),0.5)
-   
+
    
    """
    my_map["capacity"] = cap_nueva

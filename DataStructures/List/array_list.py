@@ -181,6 +181,12 @@ def merge(list_1, list_2, sort_crit):
             add_last(merged_list, ed)
             r += 1
     return merged_list
+#función lab 10
+def sort_tupla(element_1, element_2):
+    is_sorted = False
+    if element_1[1] < element_2[1]:
+        is_sorted = True
+    return is_sorted
 
 def quick_sort(array_list, sort_crit):
     if array_list["size"] > 1:

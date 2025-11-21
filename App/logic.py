@@ -256,27 +256,18 @@ def get_most_concurrent_stops(analyzer):
     Obtiene las 5 paradas más concurridas
     """
     # TODO: Obtener las 5 paradas más concurridas, es decir, la suma de los arcos con las llaves que comparten una parada (sin el bus)   
-    analyzer_connections = analyzer['connections']
-    vertex_keys = G.vertices(analyzer_connections)
-    
-    stop_degrees = m.new_map(4000, 0.7)
-    for key in vertex_keys['elements']:
-        degree = G.degree(analyzer_connections, key)
-        parada = key.split("-")[0]
-        p = m.get(stop_degrees, parada)
-        if p is None:
-            m.put(stop_degrees, parada, degree)
-        else:
-            m.put(stop_degrees, parada, p + degree)     
-            
-    stop_list = lt.new_list()
-    llaves = m.key_set(stop_degrees)
-    valores = m.value_set(stop_degrees)
-    for i in range(al.size(llaves)):
-        lt.add_last(stop_list, (al.get_element(llaves, i), al.get_element(valores, i)))
-    ordenada = lt.quick_sort(stop_list, lt.sort_tupla)
-    top_5 = lt.sub_list(ordenada, 1, 5)
-    return top_5
+    graph_paradasbus = G.vertices(analyzer["connections"])
+    tam = al.size(graph_paradasbus)
+    cuenta = al.new_list()
+    for i in range(tam):
+        paradabus = al.get_element(graph_paradasbus, i)
+        conexiones = G.degree(analyzer["connections"], paradabus)
+        
+        al.add_last(cuenta, (paradabus, conexiones))
+
+    ordenado = lt.quick_sort(cuenta, lt.sort_tupla)
+    top = al.sub_list(ordenado, 0, 5)
+    return top
 
 def get_route_between_stops_dfs(analyzer, stop1, stop2):
     """
