@@ -31,6 +31,8 @@
 from DataStructures.List import single_linked_list as lt
 from DataStructures.Map import map_linear_probing as m
 from DataStructures.Graph import digraph as G
+from DataStructures.Graph import dfs as dfs
+from DataStructures.Stack import stack as s
 
 import csv
 import time
@@ -267,7 +269,15 @@ def get_route_between_stops_dfs(analyzer, stop1, stop2):
     Obtener la ruta entre dos parada usando dfs
     """
     # TODO: Obtener la ruta entre dos parada usando dfs
-    ...
+    graph = analyzer['connections']
+    if not G.contains_vertex(graph, stop1) or not G.contains_vertex(graph, stop2):
+        return None
+    visited_map = dfs.dfs(graph, stop1)
+    if not dfs.has_path_to(stop2, visited_map):
+        return None
+    pila = dfs.path_to(stop2, visited_map)
+    return pila
+    
 
 def get_route_between_stops_bfs(analyzer, stop1, stop2):
     """

@@ -25,6 +25,7 @@
  """
 
 from DataStructures.List import single_linked_list as lt
+from DataStructures.Stack import stack as s
 import sys
 import threading
 from App import logic
@@ -82,8 +83,49 @@ def option_two(cont ):
         print(str(i+1)+". " + str(elem[0])+": "+str(elem[1])+" conexiones")
 
 def option_three(cont):
-    # TODO: Imprimir los resultados de la opción 3
-    ...
+    # Imprimir los resultados de la opción 3 (DFS)
+    print("----- OPCIÓN 3 (DFS) ----")
+    stop1 = input("Parada inicial: ")
+    stop2 = input("Parada destino: ")
+
+    path = logic.get_route_between_stops_dfs(cont, stop1, stop2)
+    
+    if path is None:
+        print("No hay ruta entre las paradas " + stop1 + " y " + stop2)
+        return
+    ruta = []
+    while not s.is_empty(path):
+        v = s.pop(path)
+        ruta.insert(0, v)
+
+    if len(ruta) > 0:
+        prev = None        
+        current = []       
+        for v in ruta:
+            parts = v.split("-")
+            if len(parts) != 2:
+                bus_stop = v
+                ruta_num = ""
+            else:
+                bus_stop = parts[0]
+                ruta_num = parts[1]
+            if prev is None:
+                print(f"--- Tomar bus '{ruta_num}' desde '{v}' ---")
+                current.append(bus_stop)
+            elif ruta_num != prev:
+                print(" -> ".join(current) + " ->")
+                print(f"--- Cambiar a bus '{ruta_num}' en la parada '{current[-1]}' ---")
+                current = [current[-1], bus_stop]
+            else:
+                current.append(bus_stop)
+            prev = ruta_num
+        if current:
+            print(" -> ".join(current))
+    else:
+        print("No se encontró ruta.")
+
+    print()
+
 
 def option_four(cont):
     # TODO: Imprimir los resultados de la opción 4
