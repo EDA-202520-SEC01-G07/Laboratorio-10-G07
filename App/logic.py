@@ -276,8 +276,8 @@ def get_route_between_stops_dfs(analyzer, stop1, stop2):
     visited_map = dfs.dfs(graph, stop1)
     if not dfs.has_path_to(stop2, visited_map):
         return None
-    pila = dfs.path_to(stop2, visited_map)
-    return pila
+    path = dfs.path_to(stop2, visited_map)
+    return path
     
 
 def get_route_between_stops_bfs(analyzer, stop1, stop2):
