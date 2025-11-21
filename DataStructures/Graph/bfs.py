@@ -17,4 +17,18 @@ def bfs(my_graph,source):
                 q.enqueue(cola,adj[i])
                 edge_from[adj[i]]=v
     return visitados, edge_from
-      
+
+def has_path_to(key_v, visited_map):
+    return G.contains_vertex(visited_map, key_v)
+
+def path_to(key_v, visited_map):
+    if not has_path_to(key_v, visited_map):
+        return None
+    else:
+        stack=s.new_stack()
+        current_key=key_v
+        while current_key is not None:
+            s.push(stack, current_key)
+            current_key=visited_map[current_key]
+        return stack
+           
