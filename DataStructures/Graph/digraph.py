@@ -17,7 +17,7 @@ def insert_vertex(my_graph, key_u, info_u):
 def add_edge (my_graph, key_u, key_v, weight=1.0):
     vertex_u = ml.get(my_graph["vertices"], key_u)
     vertex_v = ml.get(my_graph["vertices"], key_v)
-    if vertex_u is None or vertex_v is None:
+    if vertex_u is None:
         raise Exception("El vertice u no existe")
     if vertex_v is None:
         raise Exception("El vertice v no existe")

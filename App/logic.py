@@ -79,7 +79,7 @@ def new_analyzer():
         }
 
         analyzer['stops'] = m.new_map(
-            num_elements=4500, load_factor=0.7, prime=109345121)
+            num_elements=13700, load_factor=0.7, prime=109345121)
 
         analyzer['connections'] = G.new_graph(order=20000)
         return analyzer
@@ -257,6 +257,7 @@ def get_most_concurrent_stops(analyzer):
     analyzer_connections = analyzer['connections']
     vertex_keys = G.vertices(analyzer_connections)
     stop_degrees = lt.new_list()
+    print(vertex_keys['elements'])
     for key in vertex_keys['elements']:
         degree = G.degree(analyzer_connections, key)
         lt.add_last(stop_degrees, (key, degree))
