@@ -267,7 +267,7 @@ def get_most_concurrent_stops(analyzer):
         if p is None:
             m.put(stop_degrees, parada, degree)
         else:
-            m.put(stop_degrees, parada, p + degree)     
+            m.put(stop_degrees, parada, p["value"] + degree)     
             
     stop_list = lt.new_list()
     llaves = m.key_set(stop_degrees)
@@ -275,7 +275,7 @@ def get_most_concurrent_stops(analyzer):
     for i in range(al.size(llaves)):
         lt.add_last(stop_list, (al.get_element(llaves, i), al.get_element(valores, i)))
     ordenada = lt.quick_sort(stop_list, lt.sort_tupla)
-    top_5 = lt.sub_list(ordenada, 0, 5)
+    top_5 = lt.sub_list(ordenada, 1, 5)
     return top_5
 
 def get_route_between_stops_dfs(analyzer, stop1, stop2):
