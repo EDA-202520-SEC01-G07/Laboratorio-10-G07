@@ -267,7 +267,7 @@ def get_most_concurrent_stops(analyzer):
         if p is None:
             m.put(stop_degrees, parada, degree)
         else:
-            m.put(stop_degrees, parada, p["value"] + degree)     
+            m.put(stop_degrees, parada, p + degree)     
             
     stop_list = lt.new_list()
     llaves = m.key_set(stop_degrees)
