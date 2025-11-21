@@ -12,7 +12,7 @@ def bfs(my_graph,source):
         v=q.dequeue(cola)
         adj= q(my_graph,v)
         for i in range(lt.size(adj)):
-            if not visitado[i]:
+            if not visitados[i]:
                 visitados[adj[i]]=True
                 q.enqueue(cola,adj[i])
                 edge_from[adj[i]]=v
