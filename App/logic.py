@@ -35,6 +35,7 @@ from DataStructures.Graph import digraph as G
 from DataStructures.Graph import dfs as dfs
 from DataStructures.Graph import bfs as bfs
 from DataStructures.Stack import stack as s
+from DataStructures.Queue import queue as q
 
 import csv
 import time
@@ -296,7 +297,11 @@ def get_route_between_stops_bfs(analyzer, stop1, stop2):
     if not bfs.has_path_to(stop2, visited_map):
         return None
     path = bfs.path_to(stop2, visited_map)
-    return path
+    
+    camino = al.new_list()
+    while not s.is_empty(path):
+        al.add_last(camino, s.pop(path))
+    return camino
     
 
 def get_shortest_route_between_stops(analyzer, stop1, stop2):

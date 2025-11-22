@@ -19,16 +19,22 @@ def bfs_vertex(my_graph, source, visited_map):
         adj = G.adjacent(my_graph, v) #Es un mapa
         lista = adj["table"]
         for i in range(lt.size(lista)):
-            w = lt.get_element(lista, i)
-            elem = ml.get(visited_map, w)
-            if elem is not None:
-                ml.put(visited_map, w, {"edge_from": v,"dist_to": elem["dist_to"] + 1})
-                q.enqueue(cola, w)
+            e = lt.get_element(lista, i)
+            if e is not None:
+                if e is None or e["key"] is None:
+                    continue
+                w = e["key"]
+                if G.contains_vertex(my_graph, w):
+                    elem = ml.get(visited_map, w)
+                    if elem is None:
+                        info = ml.get(visited_map, v)
+                        ml.put(visited_map, w, {"edge_from": v, "dist_to": info["dist_to"] + 1})
+                        q.enqueue(cola, w)
     return visited_map
         
 
 def has_path_to(key_v, visited_map):
-    return G.contains_vertex(visited_map, key_v)
+    return ml.contains(visited_map, key_v)
 
 def path_to(key_v, visited_map):
     if not has_path_to(key_v, visited_map):
@@ -38,15 +44,6 @@ def path_to(key_v, visited_map):
         current_key=key_v
         while current_key is not None:
             s.push(stack, current_key)
-            current_key=visited_map[current_key]
+            info = ml.get(visited_map, current_key)
+            current_key= info["edge_from"]
         return stack
-           
-        
-
-
-
-
-
-
-
-      

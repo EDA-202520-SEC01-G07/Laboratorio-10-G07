@@ -130,15 +130,24 @@ def option_three(cont):
 
 def option_four(cont):
     # TODO: Imprimir los resultados de la opción 4
-    print("---- OCIÓN 4 (BFS) ----")
+    print("---- OPCIÓN 4 (BFS) ----")
     stop1 = input("Parada inicial: ")
     stop2 = input("Parada destino: ")
-    
+    buses = {}
     path = logic.get_route_between_stops_bfs(cont, stop1, stop2)
     if path is None:
         print("No hay ruta entre las paradas " + stop1 + " y " + stop2)
     else:
-        print(path) #Revisar cómo aparece para darlo en el formato que es
+        for i in range(al.size(path)):
+            paradabus = al.get_element(path, i)
+            parada, bus = paradabus.split("-")[0], paradabus.split("-")[1]
+            if bus not in buses:
+                buses[bus] = []
+            buses[bus].append(parada)
+        for i in buses:
+            print("--- Tomar bus '"+ i + "' desde '"+buses[i][0]+"-"+i)
+            print(" -> ".join(buses[i]))
+            
 
 def option_five(cont):
     # TODO: Imprimir los resultados de la opción 5
