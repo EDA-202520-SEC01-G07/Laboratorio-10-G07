@@ -42,11 +42,12 @@ def degree(my_graph, key_u):
         raise Exception("El vertice u no existe")
     return ml.size(vertex_u["adjacents"])
 
-def adjacent(my_graph, key_u):
+def adjacent(my_graph, key_u):  #Retorna key_set, no un mapa
     vertex_u = ml.get(my_graph["vertices"], key_u)
-    if vertex_u is None:
-        raise Exception("El vertice u no existe")
-    return vertex_u["adjacents"]
+    if vertex_u is not None:
+        lista = ml.key_set(vertex_u["adjacents"])
+        return lista
+    return Exception("El vertice u no existe")
 
 def vertices (my_graph):
     keys = ml.key_set(my_graph["vertices"])

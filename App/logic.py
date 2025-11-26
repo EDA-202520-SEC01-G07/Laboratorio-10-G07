@@ -36,6 +36,7 @@ from DataStructures.Graph import dfs as dfs
 from DataStructures.Graph import bfs as bfs
 from DataStructures.Stack import stack as s
 from DataStructures.Queue import queue as q
+from DataStructures.Graph import dijkstra as dj
 
 import csv
 import time
@@ -266,7 +267,8 @@ def get_most_concurrent_stops(analyzer):
         
         al.add_last(cuenta, (paradabus, conexiones))
 
-    ordenado = lt.quick_sort(cuenta, lt.sort_tupla)
+    ordenado = al.shell_sort(cuenta, al.sort_tupla)
+    print(ordenado)
     top = al.sub_list(ordenado, 0, 5)
     return top
 
@@ -311,8 +313,8 @@ def get_shortest_route_between_stops(analyzer, stop1, stop2):
     # TODO: Obtener la ruta mínima entre dos paradas
     # Nota: Tenga en cuenta que el debe guardar en la llave
     #       analyzer['paths'] el resultado del algoritmo de Dijkstra
-    analyzer["paths"] = bfs.dijkstra(analyzer["connections"], stop1)
-    return bfs.path_to_djk(stop2, analyzer["paths"])
+    analyzer["paths"] = dj.dijkstra(analyzer["connections"], stop1)
+    return dj.path_to(stop2, analyzer["paths"])
 
 def show_calculated_shortest_route(analyzer, destination_stop):
     # (Opcional) TODO: Mostrar en un mapa la ruta mínima entre dos paradas usando folium

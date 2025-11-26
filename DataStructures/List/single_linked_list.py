@@ -222,7 +222,7 @@ sort_criteria = default_sort_criteria
 
 def sort_tupla(element_1, element_2):
     is_sorted = False
-    if element_1[1] < element_2[1]:
+    if element_1[1] > element_2[1]:
         is_sorted = True
     return is_sorted
 

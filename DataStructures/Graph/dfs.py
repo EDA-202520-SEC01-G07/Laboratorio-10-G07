@@ -6,29 +6,27 @@ from DataStructures.Map import map_linear_probing as m
 
 def dfs(my_graph, source):
     # grafo que almacenará los visitados
-    d = m.new_map(2, 0.5)
-    visitados = m.new_map(G.size(my_graph),0.7)
+    visitados = m.new_map(num_elements=G.order(my_graph), load_factor=0.5,)
     m.put(visitados, source, {"marked": True, "edge_from": None})
-    m.put(d, "source", source)
-    m.put(d, "visited", visitados)
-    dfs_vertex(my_graph, source, d)
-    return d
+    visitados = dfs_vertex(my_graph, source, visitados)
+    return visitados
 
-def dfs_vertex(my_graph, vertex_key, dict):
-    # Marcar el vértice como visitado
-    visitados = m.get(dict, "visited")
+def dfs_vertex(my_graph, vertex_key, visited_dict):
+    # Marcar el vértice como visitad
 
     # Obtener la lista de adyacencia del vértice
-    adyacentes = m.key_set(G.adjacent(my_graph, vertex_key))
+    adyacentes =G.adjacent(my_graph, vertex_key)
 
     # Recorrer cada vecino
     for i in range(lt.size(adyacentes)):
         vecino = lt.get_element(adyacentes, i)
-
+        visitados = m.get(visited_dict, vecino)
+       
         # Si no ha sido visitado
-        if not m.contains(visitados, vecino):
-            m.put(visitados, vecino, {"marked": True, "edge_from": vertex_key})
-            dfs_vertex(my_graph, vecino, dict)  # LLAMADA RECURSIVA
+        if visitados is None:
+            m.put(visited_dict, vecino, {"marked": True, "edge_from": vertex_key})
+            dfs_vertex(my_graph, vecino, visited_dict)  # LLAMADA RECURSIVA
+    return visited_dict
 
 def has_path_to(key_v, visited_map):
     return m.contains(visited_map, key_v)
@@ -36,12 +34,11 @@ def has_path_to(key_v, visited_map):
 def path_to(key_v, visited_map):
     path=s.new_stack()
     current_key=key_v
-    if not m.contains(visited_map, key_v):
+    i =m.get(visited_map, key_v)
+    if i is None:
         return None
-    else:
-        while current_key is not None:
-            s.push(path, current_key)
-            i =m.get(visited_map, current_key)
-            current_key = i["edge_from"]
-        return path
+    while current_key is not None:
+        s.push(path, current_key)
+        current_key = m.get(visited_map, current_key)["edge_from"]
+    return path
     

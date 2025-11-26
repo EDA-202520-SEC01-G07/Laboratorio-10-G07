@@ -184,7 +184,7 @@ def merge(list_1, list_2, sort_crit):
 #función lab 10
 def sort_tupla(element_1, element_2):
     is_sorted = False
-    if element_1[1] < element_2[1]:
+    if element_1[1] > element_2[1]:
         is_sorted = True
     return is_sorted
 
