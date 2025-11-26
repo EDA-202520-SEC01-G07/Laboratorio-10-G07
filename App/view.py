@@ -151,8 +151,27 @@ def option_four(cont):
 
 def option_five(cont):
     # TODO: Imprimir los resultados de la opción 5
-    ...
+    #s1 = input("Origen: ")
+    #s2 = input("Destino: ")
+    s1="66009-100"
+    s2="14151-10"
+    path = logic.get_shortest_route_between_stops(cont,s1,s2)
+    buses = {}
+    print(path)
+    if path is None:
+        print("No hay ruta entre las paradas " + s1 + " y " + s2)
+    else:
+        while not s.is_empty(path):
+            paradabus = s.pop(path)
+            parada, bus = paradabus.split("-")[0], paradabus.split("-")[1]
+            if bus not in buses:
+                buses[bus] = []
+            buses[bus].append(parada)
+        for i in buses:
+            print("--- Tomar bus '"+ i + "' desde '"+buses[i][0]+"-"+i)
+            print(" -> ".join(buses[i]))
 
+    
 def option_six(cont):
     # (Opcional) TODO: Imprimir los resultados de la opción 6
     ...

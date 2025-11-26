@@ -59,7 +59,7 @@ def init_structure(graph, source):
         elem = lt.get_element(vertices, i)
         ml.put(djk["visited"], elem, {"marked": False, "edge_from": None, "dist_to": math.inf})
     ml.put(djk["visited"], source, {"marked": False, "edge_from": None, "dist_to": 0})
-    pq.insert(djk["pq"], source, 0.0)
+    pq.insert(djk["pq"], 0.0, source)
     return djk
     
 def dijkstra(graph, source):
@@ -72,39 +72,42 @@ def dijkstra(graph, source):
         
         while not pq.is_empty(pila):
             v_m = pq.remove(pila)
-            marcado = ml.get(marked, v_m)["value"]
-            dist_vm = marcado["dist_to"]
-            ml.put(marked, v_m, {"marked": True, "edge_from": marcado["edge_from"], "dist_to": dist_vm})
-            
-            adj = G.adjacent(graph, v_m)
-            llaves = ml.key_set(adj)
-            for i in range(lt.size(llaves)):
-                elem = lt.get_element(llaves, i)
-                peso = ml.get(adj, elem)
-                mark = ml.get(marked, elem) #me da el value directamente
-                if mark is None:
-                    continue
-                if mark["marked"] is False:
-                    costo = peso + dist_vm
-                    if costo < mark["dist_to"]:
-                        mark["dist_to"] = costo
-                        mark["edge_from"] = v_m
-                        ml.put(marked, elem, {"marked": False, "edge_from": v_m, "dist_to": mark["dist_to"]})
-                        pq.insert(pila, elem, costo)
+            marcado = ml.get(marked, v_m)
+            if marcado is None:
+                continue
+            else:
+                dist_vm = marcado["dist_to"]
+                ml.put(marked, v_m, {"marked": True, "edge_from": marcado["edge_from"], "dist_to": dist_vm})
+                
+                adj = G.adjacent(graph, v_m)
+                llaves = ml.key_set(adj)
+                for i in range(lt.size(llaves)):
+                    elem = lt.get_element(llaves, i)
+                    peso = ml.get(adj, elem)["weight"]
+                    mark = ml.get(marked, elem) #me da el value directamente
+                    if mark is None:
+                        continue
+                    if mark["marked"] is False:
+                        costo = peso + dist_vm
+                        if costo < mark["dist_to"]:
+                            mark["dist_to"] = costo
+                            mark["edge_from"] = v_m
+                            ml.put(marked, elem, {"marked": False, "edge_from": v_m, "dist_to": mark["dist_to"]})
+                            pq.insert(pila, costo, elem)
         return djk
     
-def dist_to(key_v, aux):
+def dist_to_djk(key_v, aux):
     nodo = ml.get(aux["visited"], key_v)
     return (nodo["dist_to"])
         
-def has_path_to(key_v, aux):
+def has_path_to_djk(key_v, aux):
     elem = ml.get(aux["visited"], key_v)
     if elem is not None and elem["dist_to"] != math.inf:
         return True
     return False
 
-def path_to(key_v, aux):
-    if not has_path_to(key_v, aux):
+def path_to_djk(key_v, aux):
+    if not has_path_to_djk(key_v, aux):
         return None
     else:
         stack = s.new_stack()
