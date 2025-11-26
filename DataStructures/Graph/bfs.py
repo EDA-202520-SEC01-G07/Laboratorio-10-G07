@@ -98,20 +98,19 @@ def dist_to(key_v, aux):
     return (nodo["dist_to"])
         
 def has_path_to(key_v, aux):
-    elem = ml.contains(aux["visited"], key_v)
-    if elem["dist_to"] != math.inf:
+    elem = ml.get(aux["visited"], key_v)
+    if elem is not None and elem["dist_to"] != math.inf:
         return True
     return False
 
 def path_to(key_v, aux):
-    nodo = ml.get(aux["visited"], key_v)
     if not has_path_to(key_v, aux):
         return None
     else:
         stack = s.new_stack()
-        s.push(stack, nodo)
-        while nodo != aux["source"]:
-            visitado = nodo["edge_from"]
-            s.push(stack, visitado)
-            nodo = visitado["edge_from"]
+        while key_v != aux["source"]:
+            s.push(stack, key_v)
+            nodo = ml.get(aux["visited"], key_v)
+            key_v = nodo["edge_from"]
+        s.push(stack, aux["source"])
         return stack
