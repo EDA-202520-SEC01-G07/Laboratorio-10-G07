@@ -100,33 +100,21 @@ def option_three(cont):
         v = s.pop(path)
         ruta.insert(0, v)
 
-    if len(ruta) > 0:
-        prev = None        
-        current = []       
-        for v in ruta:
-            parts = v.split("-")
-            if len(parts) != 2:
-                bus_stop = v
-                ruta_num = ""
-            else:
-                bus_stop = parts[0]
-                ruta_num = parts[1]
-            if prev is None:
-                print(f"--- Tomar bus '{ruta_num}' desde '{v}' ---")
-                current.append(bus_stop)
-            elif ruta_num != prev:
-                print(" -> ".join(current) + " ->")
-                print(f"--- Cambiar a bus '{ruta_num}' en la parada '{current[-1]}' ---")
-                current = [current[-1], bus_stop]
-            else:
-                current.append(bus_stop)
-            prev = ruta_num
-        if current:
-            print(" -> ".join(current))
+    buses = {}
+    path = logic.get_route_between_stops_bfs(cont, stop1, stop2)
+    if path is None:
+        print("No hay ruta entre las paradas " + stop1 + " y " + stop2)
     else:
-        print("No se encontró ruta.")
-
-    print()
+        for i in range(al.size(path)):
+            paradabus = al.get_element(path, i)
+            parada, bus = paradabus.split("-")[0], paradabus.split("-")[1]
+            if bus not in buses:
+                buses[bus] = []
+            buses[bus].append(parada)
+        for i in buses:
+            print("--- Tomar bus '"+ i + "' desde '"+buses[i][0]+"-"+i)
+            print(" -> ".join(buses[i]))
+            
 
 
 def option_four(cont):

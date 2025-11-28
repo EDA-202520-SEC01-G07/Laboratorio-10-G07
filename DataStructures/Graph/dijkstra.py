@@ -33,9 +33,8 @@ def dijkstra(graph, source):
             else:
                 dist_vm = marcado["dist_to"]
                 ml.put(marked, v_m, {"marked": True, "edge_from": marcado["edge_from"], "dist_to": dist_vm})
-                
-                adj = G.adjacent(graph, v_m)
-                llaves = ml.key_set(adj)
+                adj = G.edges_vertex(graph, v_m)
+                llaves = G.adjacent(graph, v_m)
                 for i in range(lt.size(llaves)):
                     elem = lt.get_element(llaves, i)
                     peso = ml.get(adj, elem)["weight"]
