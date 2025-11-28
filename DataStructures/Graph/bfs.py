@@ -17,20 +17,18 @@ def bfs_vertex(my_graph, source, visited_map):
 
     while not q.is_empty(cola):
         v = q.dequeue(cola)
-        adj = G.adjacent(my_graph, v) #Es un mapa
-        lista = adj["table"]
+        lista = G.adjacent(my_graph, v) #Es un mapa
         for i in range(lt.size(lista)):
-            e = lt.get_element(lista, i)
-            if e is not None:
-                if e is None or e["key"] is None:
-                    continue
-                w = e["key"]
+            w = lt.get_element(lista, i)
+            if w is not None:
                 if G.contains_vertex(my_graph, w):
                     elem = ml.get(visited_map, w)
                     if elem is None:
                         info = ml.get(visited_map, v)
                         ml.put(visited_map, w, {"edge_from": v, "dist_to": info["dist_to"] + 1})
                         q.enqueue(cola, w)
+                else:
+                    continue
     return visited_map
         
 

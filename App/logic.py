@@ -268,7 +268,6 @@ def get_most_concurrent_stops(analyzer):
         al.add_last(cuenta, (paradabus, conexiones))
 
     ordenado = al.shell_sort(cuenta, al.sort_tupla)
-    print(ordenado)
     top = al.sub_list(ordenado, 0, 5)
     return top
 
