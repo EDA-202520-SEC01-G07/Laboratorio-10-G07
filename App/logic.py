@@ -35,7 +35,7 @@ from DataStructures.Graph import digraph as G
 from DataStructures.Graph import dfs as dfs
 from DataStructures.Graph import bfs as bfs
 from DataStructures.Stack import stack as s
-from DataStructures.Queue import queue as q
+from DataStructures.Priority_queue import priority_queue as pq
 from DataStructures.Graph import dijkstra as dj
 
 import csv
