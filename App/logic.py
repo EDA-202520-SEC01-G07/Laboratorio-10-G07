@@ -314,7 +314,7 @@ def get_shortest_route_between_stops(analyzer, stop1, stop2):
     # Nota: Tenga en cuenta que el debe guardar en la llave
     #       analyzer['paths'] el resultado del algoritmo de Dijkstra
     analyzer["paths"] = dj.dijkstra(analyzer["connections"], stop1)
-    print(dj.dist_to(stop2, analyzer["paths"]))
+    print("Distancia mínima: "+str(dj.dist_to(stop2, analyzer["paths"])))
     return dj.path_to(stop2, analyzer["paths"])
 
 def show_calculated_shortest_route(analyzer, destination_stop):

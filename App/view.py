@@ -78,19 +78,16 @@ def option_one(cont):
 def option_two(cont):
     # TODO: Imprimir los resultados de la opción 2
     r = logic.get_most_concurrent_stops(cont)
-    print(r)
     print("Las paradas más concurridas son: ")
-    #for i in range(al.size(r)):
-    #    elem = al.get_element(r, i)
-    #    print(str(i+1)+". " + str(elem[0])+": "+str(elem[1])+" conexiones")
+    for i in range(al.size(r)):
+        elem = al.get_element(r, i)
+        print(str(i+1)+". " + str(elem[0])+": "+str(elem[1])+" conexiones")
 
 def option_three(cont):
     # Imprimir los resultados de la opción 3 (DFS)
     print("----- OPCIÓN 3 (DFS) -----")
-    #stop1 = input("Parada inicial: ")
-    #stop2 = input("Parada destino: ")
-    stop1= "66009-100"
-    stop2 = "14151-10"
+    stop1 = input("Parada inicial: ")
+    stop2 = input("Parada destino: ")
     path = logic.get_route_between_stops_dfs(cont, stop1, stop2)
     
     if path is None:
@@ -121,10 +118,8 @@ def option_three(cont):
 def option_four(cont):
     # TODO: Imprimir los resultados de la opción 4
     print("---- OPCIÓN 4 (BFS) ----")
-    #stop1 = input("Parada inicial: ")
-    #stop2 = input("Parada destino: ")
-    stop1 = "66009-100"
-    stop2 = "14151-10"
+    stop1 = input("Parada inicial: ")
+    stop2 = input("Parada destino: ")
     buses = {}
     path = logic.get_route_between_stops_bfs(cont, stop1, stop2)
     if path is None:
@@ -144,10 +139,8 @@ def option_four(cont):
 def option_five(cont):
     # TODO: Imprimir los resultados de la opción 5
     print("----- OPCIÓN 5 (Dijkstra) -----")
-    #s1 = input("Origen: ")
-    #s2 = input("Destino: ")
-    s1="66009-100"
-    s2="14151-10"
+    s1 = input("Origen: ")
+    s2 = input("Destino: ")
     path = logic.get_shortest_route_between_stops(cont,s1,s2)
     buses = {}
     if path is None:
