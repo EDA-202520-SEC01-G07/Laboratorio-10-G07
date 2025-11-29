@@ -264,7 +264,8 @@ def get_most_concurrent_stops(analyzer):
     for i in range(tam):
         paradabus = al.get_element(graph_paradasbus, i)
         conexiones = G.degree(analyzer["connections"], paradabus)
-        
+        if conexiones>10:
+            print(conexiones)
         al.add_last(cuenta, (paradabus, conexiones))
 
     ordenado = al.shell_sort(cuenta, al.sort_tupla)
@@ -313,6 +314,7 @@ def get_shortest_route_between_stops(analyzer, stop1, stop2):
     # Nota: Tenga en cuenta que el debe guardar en la llave
     #       analyzer['paths'] el resultado del algoritmo de Dijkstra
     analyzer["paths"] = dj.dijkstra(analyzer["connections"], stop1)
+    print(dj.dist_to(stop2, analyzer["paths"]))
     return dj.path_to(stop2, analyzer["paths"])
 
 def show_calculated_shortest_route(analyzer, destination_stop):
